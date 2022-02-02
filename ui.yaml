@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  urlPrefix: 
+drupalVersion: 7
+page:
+  dir: view
+  glob-patterns:
+    - "root/*.html"
+  default-template: layout.html
+  syntax: braces
+  pages: 
+    - url: content-types
+      template-files: ["content-types-with-fields.tpl"]
+    - url: nodes/{type}
+      template-files: ["nodes.tpl"]
+    - url: front_page
+      template-files: ["front_page.tpl"]
+    - url: node/{nid}
+      template-files: ["node.tpl", "node-content.htm"]
+    - url: content/{path}
+      template-files: ["path-node.tpl", "node-content.htm"]
+    - url: test/{arg}
+      template-files: ["test.tpl", "test.htm"]
+  properties:
+    PageSize: 50
+    SummaryLength: 500
+    #DateTimeFormat: "2006-01-02 15:04"
+    DateTimeFormat: "01/02/2006 15:04"
+    BaseUrl: ""
+    Lang: el
+nodeQueries:
+  test: 
+    sql: WHERE n.nid = 10
+    nodeAlias: n
+cookie-name: d7
+cookie-key-files:
+- /etc/opt/key1.yaml
+csrf-key: Q0OIbq9-orhTd2IMO2tJ479B52LpbBfEINGmme1OeRI

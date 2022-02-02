@@ -1,0 +1,44 @@
+<div class="container">
+<h1>{{.node.Title}}</h1>
+
+<div>nid={{.node.Id}}</div>
+
+{{$fields := (Drupal.Fields .node.Type)}}
+{{$node := .node}}
+{{$summaryLength := .SummaryLength}}
+
+{{range $i, $f := $fields}}
+{{if (eq $f.Type "text_with_summary")}}
+{{range $i, $b := $node.ValuesTextWithSummary "body" 1}}
+<div class="summary">
+<div>Summary:</div>
+{{$b.SummaryHTML $summaryLength}}
+</div>
+<div>
+{{$b.Text}}
+</div>
+{{end}}
+{{end}}
+{{end}}
+
+<table>
+<tbody>
+{{range $i, $f := $fields}}
+{{if (eq $f.Type "text")}}
+{{range $i, $s := $node.ValuesText $f.Name 0}}
+<tr><td>{{$f.Label}}:</td><td>{{$s}}</tr></tr>
+{{end}}
+{{else if (eq $f.Type "number_float")}}
+{{range $i, $v := $node.ValuesFloat $f.Name 0}}
+<tr><td>{{$f.Label}}:</td><td>{{$v}}</tr></tr>
+{{end}}
+{{else if (eq $f.Type "number_integer")}}
+{{range $i, $v := $node.ValuesInteger $f.Name 0}}
+<tr><td>{{$f.Label}}:</td><td>{{$v}}</tr></tr>
+{{end}}
+{{end}}
+{{end}}
+</tbody>
+</table>
+
+</div>
