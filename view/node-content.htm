@@ -1,21 +1,16 @@
-<div class="container">
-<h1>{{.node.Title}}</h1>
-
-<div>nid={{.node.Id}}</div>
-
-{{$fields := (Drupal.Fields .node.Type)}}
 {{$node := .node}}
-{{$summaryLength := .SummaryLength}}
+{{$fields := (Drupal.Fields .node.Type)}}
+{{$dateFormat := .DateTimeFormat}}
+
+<div class="container">
+<h1>{{$node.Title}}</h1>
+<div class="date">{{F.FormatTime $node.Created $dateFormat}}</div>
 
 {{range $i, $f := $fields}}
 {{if (eq $f.Type "text_with_summary")}}
 {{range $i, $b := $node.ValuesTextWithSummary "body" 1}}
-<div class="summary">
-<div>Summary:</div>
-{{$b.SummaryHTML $summaryLength}}
-</div>
 <div>
-{{$b.Text}}
+{{$b.TextHTML}}
 </div>
 {{end}}
 {{end}}
@@ -40,5 +35,18 @@
 {{end}}
 </tbody>
 </table>
+
+{{$comments := $node.Comments}}
+{{if (gt (len $comments) 0)}}
+<div class="comments">
+{{range $i, $c := $comments }}
+<div class="title">{{$c.Subject}}</div>
+<div><span class="author">{{$c.Author}}</span> <span class="date">{{F.FormatTime $c.Created $dateFormat}}</span></div>
+<div class="body">
+{{$c.TextHTML}}
+</div>
+{{end}}
+</div>
+{{end}}
 
 </div>

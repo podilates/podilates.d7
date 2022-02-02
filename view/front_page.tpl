@@ -1,5 +1,5 @@
 {{define "head" -}}
-<title>Nodes</title>
+<title>Ποδηλάτ-ισσ-ες</title>
 {{- end}}
 
 {{define "content"}}
@@ -8,31 +8,26 @@
 {{$nodes := (Drupal.FrontPageNodes)}}
 {{$page := (F.Page (F.Int (F.First .R.URL.Query.page)) .PageSize (len $nodes))}}
 {{$timeFormat := .DateTimeFormat}}
+{{$summaryLength := .SummaryLength}}
 <div></div>
 <div>
-{{if ($page.HasPrev)}}<a href="/front_page?page={{F.Add $page.Page -1}}">&lt;&lt;</a>{{else}}&lt;&lt;{{end}}
-{{if ($page.HasNext)}}<a href="/front_page{{.type}}?page={{F.Add $page.Page 1}}">&gt;&gt;</a>{{else}}&gt;&gt;{{end}}
-Page  {{F.Add $page.Page 1}}/{{$page.Pages}}
-, {{.PageSize}} items per page
-, {{len $nodes}} items
+
+{{$prev := "Προηγούμενη"}}
+{{$next := "Επόμενη"}}
+<span class="page-prev">{{if ($page.HasPrev)}}<a href="/front_page?page={{F.Add $page.Page -1}}">{{$prev}}</a>{{else}}{{$prev}}{{end}}</span>
+Σελίδα {{F.Add $page.Page 1}}/{{$page.Pages}}
+<span class="page-next">{{if ($page.HasNext)}}<a href="/front_page{{.type}}?page={{F.Add $page.Page 1}}">{{$next}}</a>{{else}}{{$next}}{{end}}</span>
 </div>
 
-<table class="table auto">
-<tbody>
-<tr>
-<th>Type</td>
-<th>Created</td>
-<th>Title</td>
-</tr>
-
 {{range $k, $node := (F.NodeSlice $nodes $page.Start $page.End) -}}
-<tr>
-<td>{{$node.Type}}</td>
-<td>{{F.FormatTime $node.Created $timeFormat}}</td>
-<td><a href="{{printf "/node/%d" $node.Id}}">{{$node.Title}}</a></td>
-</tr>
+
+<div class="date">{{F.FormatTime $node.Created $timeFormat}}</div>
+<div class="title">
+<a href="{{printf "/node/%d" $node.Id}}">{{$node.Title}}</a>
+</div>
+{{range $i, $b := $node.ValuesTextWithSummary "body" 1}}
+<div class="summary">{{$b.SummaryHTML $summaryLength}}</div>
 {{end}}
-</tbody>
-</table>
+{{end}}
 </div>
 {{end}}

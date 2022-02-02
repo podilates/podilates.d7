@@ -1,3 +1,20 @@
 .summary {
-	background: gray;
 }
+
+.title,
+.title a {
+	background: #29B473;
+	color: white;
+}
+
+.page-prev {
+	padding-right: 1em;
+}
+
+.page-next {
+	padding-left: 1em;
+}
+
+
+.page-prev:before {content: "<<"}
+.page-next:after {content: ">>"}
