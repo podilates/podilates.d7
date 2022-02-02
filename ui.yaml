@@ -21,6 +21,8 @@ page:
       template-files: ["path-node.tpl", "node-content.htm"]
     - url: test/{arg}
       template-files: ["test.tpl", "test.htm"]
+    - url: announce
+      template-files: ["page/announce.tpl"]
   properties:
     PageSize: 50
     SummaryLength: 500
