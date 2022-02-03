@@ -18,3 +18,8 @@
 
 .page-prev:before {content: "<<"}
 .page-next:after {content: ">>"}
+
+.announce {
+	background: #D5DE2B;
+	color: black;
+}	
