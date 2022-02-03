@@ -20,10 +20,12 @@ page:
       template-files: ["page/announce.tpl"]
     - url: ""
       template-files: ["index.tpl"]
+    - url: "new"
+      template-files: ["all.tpl"]
   properties:
     PageSize: 25
     SummaryLength: 500
-    DateTimeFormat: "01/02/2006 15:04"
+    DateTimeFormat: "01/02/2006 - 15:04"
     BaseUrl: ""
     Lang: el
 nodeQueries:
