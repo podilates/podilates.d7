@@ -2,6 +2,11 @@ location /static {
 	root /var/opt/podview;
 }
 
+location /static/css {
+	root /var/opt/podview;
+    expires 600;
+}
+
 location /libs {
 	root /share;
 }
