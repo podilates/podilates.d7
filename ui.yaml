@@ -1,6 +1,3 @@
-server:
-  port: 8080
-  urlPrefix: 
 drupalVersion: 7
 page:
   dir: view
