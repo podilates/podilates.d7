@@ -21,9 +21,8 @@ page:
     - url: ""
       template-files: ["index.tpl"]
   properties:
-    PageSize: 50
+    PageSize: 25
     SummaryLength: 500
-    #DateTimeFormat: "2006-01-02 15:04"
     DateTimeFormat: "01/02/2006 15:04"
     BaseUrl: ""
     Lang: el
