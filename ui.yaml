@@ -10,8 +10,6 @@ page:
       template-files: ["content-types-with-fields.tpl"]
     - url: nodes/{type}
       template-files: ["nodes.tpl"]
-    - url: front_page
-      template-files: ["front_page.tpl"]
     - url: node/{nid}
       template-files: ["node.tpl", "node-content.htm"]
     - url: content/{path}
