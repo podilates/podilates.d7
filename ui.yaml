@@ -20,6 +20,8 @@ page:
       template-files: ["test.tpl", "test.htm"]
     - url: announce
       template-files: ["page/announce.tpl"]
+    - url: ""
+      template-files: ["index.tpl"]
   properties:
     PageSize: 50
     SummaryLength: 500
@@ -32,6 +34,3 @@ nodeQueries:
     sql: WHERE n.nid = 10
     nodeAlias: n
 cookie-name: d7
-cookie-key-files:
-- /etc/opt/key1.yaml
-csrf-key: Q0OIbq9-orhTd2IMO2tJ479B52LpbBfEINGmme1OeRI

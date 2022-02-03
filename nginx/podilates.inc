@@ -1,5 +1,5 @@
 location /static {
-	root /share/webui/podilates.d7;
+	root /var/opt/podview;
 }
 
 location /libs {

@@ -1,1 +1,1 @@
-{{template "content-types-with-fields.tpl"}}
+{{template "front_page.tpl" .}}
