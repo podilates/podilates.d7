@@ -19,7 +19,7 @@
 </ul>
 
 <p>Αν έχετε τεχνικές γνώσεις και θέλετε να ασχοληθείτε με αυτή την προσπάθεια, ή την επισκευή του φόρουμ, ή κάτι άλλο σχετικό,
-μπορούμε να επικοινωνήσουμε στο <a href="https://github.com/podilates/podilates.d7">GitHub</a>
+μπορούμε να επικοινωνήσουμε στο <a target="_blank" href="https://github.com/podilates/podview/issues">GitHub</a>
 
 
 {{end}}
