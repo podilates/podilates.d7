@@ -6,7 +6,7 @@
 <div class="container">
 
 {{$nodes := (Drupal.FrontPageNodes)}}
-{{$page := (F.Page (F.Int (F.First .R.URL.Query.page)) .PageSize (len $nodes))}}
+{{$page := (F.Page (F.Add (F.Int (F.First .R.URL.Query.page)) -1) .PageSize (len $nodes))}}
 {{$timeFormat := .DateTimeFormat}}
 {{$summaryLength := .SummaryLength}}
 <div></div>
@@ -14,9 +14,9 @@
 
 {{$prev := "Προηγούμενη"}}
 {{$next := "Επόμενη"}}
-<span class="page-prev">{{if ($page.HasPrev)}}<a href="/?page={{F.Add $page.Page -1}}">{{$prev}}</a>{{else}}{{$prev}}{{end}}</span>
+<span class="page-prev">{{if ($page.HasPrev)}}<a href="/?page={{$page.Page}}">{{$prev}}</a>{{else}}{{$prev}}{{end}}</span>
 Σελίδα {{F.Add $page.Page 1}}/{{$page.Pages}}
-<span class="page-next">{{if ($page.HasNext)}}<a href="/?page={{F.Add $page.Page 1}}">{{$next}}</a>{{else}}{{$next}}{{end}}</span>
+<span class="page-next">{{if ($page.HasNext)}}<a href="/?page={{F.Add $page.Page 2}}">{{$next}}</a>{{else}}{{$next}}{{end}}</span>
 </div>
 
 {{range $k, $node := (F.NodeSlice $nodes $page.Start $page.End) -}}
