@@ -10,8 +10,7 @@
 {{$timeFormat := .DateTimeFormat}}
 {{$summaryLength := .SummaryLength}}
 <div></div>
-<div>
-
+<div class="pager">
 {{$prev := "Προηγούμενη"}}
 {{$next := "Επόμενη"}}
 <span class="page-prev">{{if ($page.HasPrev)}}<a href="/?page={{$page.Page}}">{{$prev}}</a>{{else}}{{$prev}}{{end}}</span>

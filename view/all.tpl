@@ -5,12 +5,12 @@
 {{define "content"}}
 <div class="container">
 
-{{$nodes := (Drupal.AllNodes)}}
+{{$nodes := (Drupal.NodesForTypes "forum" "kentriko")}}
 {{$page := (F.Page (F.Add (F.Int (F.First .R.URL.Query.page)) -1) .PageSize (len $nodes))}}
 {{$timeFormat := .DateTimeFormat}}
 <div></div>
-<div>
 
+<div class="pager">
 {{$prev := "Προηγούμενη"}}
 {{$next := "Επόμενη"}}
 <span class="page-prev">{{if ($page.HasPrev)}}<a href="/new?page={{$page.Page}}">{{$prev}}</a>{{else}}{{$prev}}{{end}}</span>
@@ -18,7 +18,7 @@
 <span class="page-next">{{if ($page.HasNext)}}<a href="/new?page={{F.Add $page.Page 2}}">{{$next}}</a>{{else}}{{$next}}{{end}}</span>
 </div>
 
-<table class="new">
+<table class="table new">
 <tbody>
 <tr>
 <th>Τύπος</th>
@@ -30,16 +30,16 @@
 
 {{range $k, $node := (F.NodeSlice $nodes $page.Start $page.End) -}}
 <tr>
-<td>{{$node.Type}}</td>
+<td>{{Drupal.ContentTypeLabel $node.Type}}</td>
 <td>
 <a href="{{printf "/node/%d" $node.Id}}">{{$node.Title}}</a>
 </td>
-<td>{{$node.CommentCount}}</td>
+<td>{{$cc := $node.CommentCount}}{{if $cc}}{{$cc}}{{end}}</td>
 <td class="date">{{F.FormatTime $node.Created $timeFormat}}</td>
 {{$c := $node.CommentSummary}}
 <td>
-{{if $c}}
-{{F.FormatTime $c.LastTime $timeFormat}} {{$c.LastAuthor}}
+{{if (gt $c.Count 0)}}
+{{F.DaysOld $c.LastTime}} ημέρες πριν<br>από {{$c.LastAuthor}}
 {{end}}
 </td>
 </tr>

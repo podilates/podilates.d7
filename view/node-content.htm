@@ -37,9 +37,11 @@
 </table>
 
 {{$comments := $node.Comments}}
+{{$page := (F.Page (F.Add (F.Int (F.First .R.URL.Query.page)) -1) .PageSize (len $comments))}}
 {{if (gt (len $comments) 0)}}
 <div class="comments">
-{{range $i, $c := $comments }}
+{{range $i, $c := (F.CommentSlice $comments $page.Start $page.End) }}
+
 <div class="title">{{$c.Subject}}</div>
 <div><span class="author">{{$c.Author}}</span> <span class="date">{{F.FormatTime $c.Created $dateFormat}}</span></div>
 <div class="body">
@@ -47,6 +49,15 @@
 </div>
 {{end}}
 </div>
+
+<div class="pager">
+{{$prev := "Προηγούμενη"}}
+{{$next := "Επόμενη"}}
+<span class="page-prev">{{if ($page.HasPrev)}}<a href="{{printf "/node/%d?page=%d" $node.Id $page.Page}}">{{$prev}}</a>{{else}}{{$prev}}{{end}}</span>
+Σελίδα {{F.Add $page.Page 1}}/{{$page.Pages}}
+<span class="page-next">{{if ($page.HasNext)}}<a href="{{printf "/node/%d?page=%d" $node.Id (F.Add $page.Page 2)}}">{{$next}}</a>{{else}}{{$next}}{{end}}</span>
+</div>
+
 {{end}}
 
 </div>
