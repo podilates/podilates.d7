@@ -25,7 +25,7 @@ page:
   properties:
     PageSize: 25
     SummaryLength: 500
-    DateTimeFormat: "01/02/2006 - 15:04"
+    DateTimeFormat: "02/01/2006 - 15:04"
     BaseUrl: ""
     Lang: el
 nodeQueries:
